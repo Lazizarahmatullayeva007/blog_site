@@ -1,0 +1,45 @@
+{% extends "blog/base.html" %}
+{% block title %}Ro'yxatdan o'tish{% endblock %}
+{% block content %}
+
+<div class="auth-wrapper">
+    <a href="/accounts/login/" class="auth-back">← Orqaga</a>
+
+    <div class="auth-header">
+        <p class="auth-sub">Yangi akkount</p>
+        <h1 class="auth-title">Ro'yxatdan o'tish</h1>
+    </div>
+
+    <div class="auth-card">
+        <div class="auth-card-head">
+            <div class="auth-icon-box">👤</div>
+            <div>
+                <div class="auth-card-title">Register</div>
+                <div class="auth-card-sub">Yangi akkount yarating</div>
+            </div>
+        </div>
+        <div class="auth-card-body">
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="auth-field">
+                        <label class="auth-label">{{ field.label|upper }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <p class="auth-error">{{ field.errors|join:", " }}</p>
+                        {% endif %}
+                        {% if field.help_text %}
+                            <p class="auth-hint">{{ field.help_text }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="auth-btn">✓ Ro'yxatdan o'tish</button>
+            </form>
+            <p class="auth-footer">
+                Akkaunt bormi? <a href="/accounts/login/">Kirish</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

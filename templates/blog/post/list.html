@@ -1,20 +1,32 @@
 {% extends "blog/base.html" %}
 {% block title %}IT-NEWS{% endblock %}
 {% block content %}
-    <h1>IT-NEWS 💻 </h1>
-    {% for post in posts %}
-        <div class="post">
-            <h2>
-                <a href="{{ post.get_absolute_url }}">
-                    {{ post.title }}
-                </a>
-            </h2>
-            <p class="date">
-                Published {{ post.publish }} by {{ post.author }}
-            </p>
-            {{ post.body|truncatewords:30|linebreaks }}
-        </div>
+    <h1 class="site-title">IT-NEWS 💻</h1>
 
+    {% for post in posts %}
+        {% if forloop.counter|divisibleby:2 %}
+            <div class="post-card card-purple">
+                <div class="post-card-inner">
+                    <div class="post-icon icon-purple">🐍</div>
+                    <h2 class="post-title title-purple">
+                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    </h2>
+                    <p class="post-date">Published {{ post.publish }} by <span class="post-author">{{ post.author }}</span></p>
+                    <p class="post-body">{{ post.body|truncatewords:30 }}</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="post-card card-cyan">
+                <div class="post-card-inner">
+                    <div class="post-icon icon-cyan">&lt;/&gt;</div>
+                    <h2 class="post-title title-cyan">
+                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    </h2>
+                    <p class="post-date">Published {{ post.publish }} by <span class="post-author">{{ post.author }}</span></p>
+                    <p class="post-body">{{ post.body|truncatewords:30 }}</p>
+                </div>
+            </div>
+        {% endif %}
     {% endfor %}
 
     {% include "paginator.html" with page=page_obj %}

@@ -1,24 +1,27 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="uz">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}{% endblock %}</title>
-        <link href="{% static 'css/blog.css' %}" rel="stylesheet">
-    </head>
-
-    <body>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="glow-star">✦</div>
+    <div id="wrapper">
         <div id="content">
             {% block content %}
             {% endblock %}
         </div>
-
         <div id="sidebar">
-            <h2>IT-YANGILIKAR</h2>
-            <p>Informatsion texnologiyalarga oid yangiliklar sayti</p>
+            <div class="sidebar-card">
+                <div class="sidebar-inner">
+                    <div class="sidebar-title">ⓘ INFO BLOK</div>
+                    <p class="sidebar-text">Informatsion texnologiyalarga oid yangiliklar sayti</p>
+                </div>
+            </div>
         </div>
-
-    </body>
+    </div>
+</body>
 </html>

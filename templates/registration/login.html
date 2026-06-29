@@ -1,0 +1,48 @@
+{% extends "blog/base.html" %}
+{% block title %}Kirish{% endblock %}
+{% block content %}
+
+<div class="auth-wrapper">
+    <a href="/" class="auth-back">← Orqaga</a>
+
+    <div class="auth-header">
+        <p class="auth-sub">Xush kelibsiz</p>
+        <h1 class="auth-title">Tizimga kirish</h1>
+    </div>
+
+    <div class="auth-card">
+        <div class="auth-card-head">
+            <div class="auth-icon-box">🔐</div>
+            <div>
+                <div class="auth-card-title">Login</div>
+                <div class="auth-card-sub">Akkauntingizga kiring</div>
+            </div>
+        </div>
+        <div class="auth-card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="auth-field">
+                    <label class="auth-label">FOYDALANUVCHI NOMI</label>
+                    <input type="text" name="username" placeholder="username" autofocus>
+                </div>
+                <div class="auth-field">
+                    <label class="auth-label">PAROL</label>
+                    <input type="password" name="password" placeholder="••••••••">
+                </div>
+                {% if form.errors %}
+                    <p class="auth-error">Username yoki parol xato!</p>
+                {% endif %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <button type="submit" class="auth-btn">🔓 Kirish</button>
+            </form>
+            <p class="auth-footer">
+                Akkaunt yo'qmi? <a href="/accounts/register/">Ro'yxatdan o'ting</a>
+            </p>
+            <p class="auth-footer">
+                <a href="/accounts/password_reset/" style="color:rgba(255,255,255,0.4);">Parolni unutdingizmi?</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
