@@ -1,0 +1,436 @@
+/* ==========================================
+                POST HERO
+========================================== */
+
+.post-hero{
+    max-width:900px;
+    margin:0 auto 50px;
+}
+
+.post-header{
+    margin-top:20px;
+}
+
+.post-category{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:999px;
+    background:var(--gradient);
+    color:#fff;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.post-header h1{
+    font-size:54px;
+    line-height:1.2;
+    margin-bottom:20px;
+}
+
+.post-meta{
+    display:flex;
+    gap:25px;
+    color:#94A3B8;
+    flex-wrap:wrap;
+}
+
+/* ==========================================
+                ARTICLE
+========================================== */
+
+.article{
+
+    max-width:900px;
+
+    margin:50px auto;
+
+    padding:45px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+}
+
+.article p{
+
+    font-size:19px;
+
+    line-height:2;
+
+    color:#E2E8F0;
+
+    margin-bottom:25px;
+
+}
+
+/* ==========================================
+                SHARE
+========================================== */
+
+.share-box{
+
+    text-align:center;
+
+    margin:60px 0;
+
+}
+
+/* ==========================================
+                COMMENTS
+========================================== */
+
+.comment{
+
+    max-width:900px;
+
+    margin:25px auto;
+
+    padding:28px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.comment .info{
+
+    color:#8B5CF6;
+
+    font-weight:600;
+
+    margin-bottom:15px;
+
+}
+
+/* ==========================================
+                COMMENT FORM
+========================================== */
+
+.comment-form{
+
+    max-width:900px;
+
+    margin:50px auto;
+
+}
+
+.comment-form p{
+
+    margin-bottom:20px;
+
+}
+
+.comment-form label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+}
+
+.comment-form input,
+.comment-form textarea{
+
+    width:100%;
+
+    padding:16px 18px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+.comment-form textarea{
+
+    min-height:180px;
+
+    resize:vertical;
+
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus{
+
+    outline:none;
+
+    border-color:#8B5CF6;
+
+}
+
+/* ==========================================
+                SUCCESS
+========================================== */
+
+.success-box{
+
+    max-width:900px;
+
+    margin:30px auto;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    background:rgba(34,197,94,.15);
+
+    border:1px solid rgba(34,197,94,.3);
+
+    color:#86EFAC;
+
+    text-align:center;
+
+}
+
+/* ==========================================
+                TAGS
+========================================== */
+
+.post-tags{
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin:25px 0 40px;
+
+}
+
+.post-tags .post-tag{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    background:rgba(124,58,237,.15);
+
+    border:1px solid rgba(124,58,237,.35);
+
+    color:#C4B5FD;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+/* ==========================================
+            COMMENT FORM
+========================================== */
+
+.comment-form{
+
+    margin-top:35px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.form-group label{
+
+    margin-bottom:10px;
+
+    font-weight:600;
+
+    color:#fff;
+
+}
+
+.comment-form input,
+.comment-form textarea{
+
+    width:100%;
+
+    padding:16px 20px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:16px;
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.3s;
+
+    outline:none;
+
+}
+
+.comment-form textarea{
+
+    min-height:170px;
+
+    resize:vertical;
+
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus{
+
+    border-color:#8B5CF6;
+
+    box-shadow:0 0 20px rgba(139,92,246,.35);
+
+}
+
+.comment-btn{
+
+    width:220px;
+
+    margin-top:10px;
+
+}
+
+/* ==========================================
+            COMMENT SECTION
+========================================== */
+
+.comment-section{
+
+    margin-top:80px;
+
+}
+
+.comment-card{
+
+    max-width:850px;
+
+    margin:auto;
+
+    padding:45px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+}
+
+.comment-card h2{
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+}
+
+.comment-subtitle{
+
+    color:#94A3B8;
+
+    margin-bottom:35px;
+
+}
+
+.comment-form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.form-group label{
+
+    margin-bottom:10px;
+
+    font-weight:600;
+
+}
+
+.comment-form input,
+.comment-form textarea{
+
+    width:100%;
+
+    padding:18px 20px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:white;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.comment-form textarea{
+
+    min-height:180px;
+
+    resize:vertical;
+
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus{
+
+    border-color:#8B5CF6;
+
+    box-shadow:0 0 25px rgba(139,92,246,.35);
+
+}
+
+.comment-btn{
+
+    width:220px;
+
+    margin-top:10px;
+
+}

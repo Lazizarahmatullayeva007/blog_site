@@ -1,27 +1,82 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
-    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+<title>
+
+{% block title %}
+
+INFO BLOG
+
+{% endblock %}
+
+| Django Technology Blog
+
+</title>
+
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/hero.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cards.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/share.css' %}">
+
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/animations.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
 </head>
+
 <body>
-    <div class="glow-star">✦</div>
-    <div id="wrapper">
-        <div id="content">
-            {% block content %}
-            {% endblock %}
-        </div>
-        <div id="sidebar">
-            <div class="sidebar-card">
-                <div class="sidebar-inner">
-                    <div class="sidebar-title">ⓘ INFO BLOK</div>
-                    <p class="sidebar-text">Informatsion texnologiyalarga oid yangiliklar sayti</p>
-                </div>
-            </div>
-        </div>
-    </div>
+
+<div class="background">
+
+    <div class="orb orb1"></div>
+
+    <div class="orb orb2"></div>
+
+    <div class="orb orb3"></div>
+
+</div>
+
+{% include "includes/navbar.html" %}
+
+<main class="container">
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+{% include "includes/footer.html" %}
+<script src="{% static 'js/main.js' %}"></script>
+
 </body>
+
 </html>

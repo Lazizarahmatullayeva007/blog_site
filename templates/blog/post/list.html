@@ -1,33 +1,148 @@
 {% extends "blog/base.html" %}
-{% block title %}IT-NEWS{% endblock %}
+
+{% block title %}
+INFO BLOG
+{% endblock %}
+
 {% block content %}
-    <h1 class="site-title">IT-NEWS 💻</h1>
 
-    {% for post in posts %}
-        {% if forloop.counter|divisibleby:2 %}
-            <div class="post-card card-purple">
-                <div class="post-card-inner">
-                    <div class="post-icon icon-purple">🐍</div>
-                    <h2 class="post-title title-purple">
-                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                    </h2>
-                    <p class="post-date">Published {{ post.publish }} by <span class="post-author">{{ post.author }}</span></p>
-                    <p class="post-body">{{ post.body|truncatewords:30 }}</p>
-                </div>
-            </div>
-        {% else %}
-            <div class="post-card card-cyan">
-                <div class="post-card-inner">
-                    <div class="post-icon icon-cyan">&lt;/&gt;</div>
-                    <h2 class="post-title title-cyan">
-                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                    </h2>
-                    <p class="post-date">Published {{ post.publish }} by <span class="post-author">{{ post.author }}</span></p>
-                    <p class="post-body">{{ post.body|truncatewords:30 }}</p>
-                </div>
-            </div>
-        {% endif %}
-    {% endfor %}
+<section class="hero">
 
-    {% include "paginator.html" with page=page_obj %}
+    <div class="hero-background">
+        <div class="hero-grid"></div>
+    </div>
+
+    <div class="hero-content">
+
+        <span class="hero-badge reveal">
+            ✦ TECHNOLOGY • DJANGO • PYTHON • AI
+        </span>
+
+        <h1 class="hero-title reveal">
+            Tech Insights <br>
+            <span>for Tomorrow</span>
+        </h1>
+
+        <p class="hero-description reveal">
+            Django, Python, Sun'iy Intellekt va zamonaviy
+            texnologiyalar haqidagi eng so'nggi maqolalarni
+            bir joyda o'qing.
+        </p>
+
+        <div class="hero-buttons reveal">
+
+            <a href="#posts" class="btn btn-primary">
+                Explore Articles
+            </a>
+
+
+        </div>
+
+        <div class="hero-stats reveal">
+
+            <div class="stat-card glass">
+                <h3>150+</h3>
+                <span>Articles</span>
+            </div>
+
+            <div class="stat-card glass">
+                <h3>25+</h3>
+                <span>Categories</span>
+            </div>
+
+            <div class="stat-card glass">
+                <h3>100%</h3>
+                <span>Free Content</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% if user.is_authenticated %}
+
+<section class="posts-section" id="posts">
+
+    <div class="section-header">
+
+        <h2>Latest Articles</h2>
+
+        <p>So'nggi qo'shilgan maqolalar</p>
+
+    </div>
+
+    <div class="posts-grid">
+
+        {% for post in posts %}
+
+        <article class="post-card glass reveal-card">
+
+            <div class="post-tag">
+                {{ post.tags.first|default:"Technology" }}
+            </div>
+
+            <h3>
+                <a href="{{ post.get_absolute_url }}">
+                    {{ post.title }}
+                </a>
+            </h3>
+
+            <p class="meta">
+                {{ post.publish|date:"d M Y" }}
+                •
+                {{ post.author }}
+            </p>
+
+            <p>
+                {{ post.body|truncatewords:30 }}
+            </p>
+
+            <a href="{{ post.get_absolute_url }}" class="read-more">
+                Read More →
+            </a>
+
+        </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% include "paginator.html" with page=page_obj %}
+
+{% else %}
+
+<section class="posts-section" id="posts">
+
+    <div class="section-header">
+
+        <h2>Maqolalarni o‘qish uchun tizimga kiring</h2>
+
+        <p>
+            Eng so‘nggi maqolalarni ko‘rish uchun
+            avval tizimga kiring yoki ro‘yxatdan o‘ting.
+        </p>
+
+        <div style="margin-top:30px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+
+            <a href="{% url 'login' %}" class="btn btn-primary">
+                Login
+            </a>
+
+            <a href="{% url 'blogapp:register' %}" class="btn btn-outline">
+                Register
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
 {% endblock %}

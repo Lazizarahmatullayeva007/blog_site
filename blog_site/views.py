@@ -1,20 +1,79 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post
 from .forms import CommentForm
+from .forms import SearchForm
 from django.core.mail import send_mail
 from .forms import EmailPostForm
-from django.contrib.auth.forms import UserCreationForm
+from .forms import RegisterForm
 from django.contrib.auth import login
 from django.shortcuts import redirect
 
 from django.views.generic import ListView
+from taggit.models import Tag
 
 
 class PostListView(ListView):
-    queryset = Post.published.all()
-    context_object_name = 'posts'
+    model = Post
+    template_name = "blog/post/list.html"
+    context_object_name = "posts"
     paginate_by = 3
-    template_name = 'blog/post/list.html'
+
+    def get_queryset(self):
+
+        queryset = Post.published.all()
+
+        tag_slug = self.kwargs.get("tag_slug")
+
+        if tag_slug:
+
+            tag = Tag.objects.get(slug=tag_slug)
+
+            queryset = queryset.filter(tags__in=[tag])
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+
+        tag_slug = self.kwargs.get("tag_slug")
+
+        if tag_slug:
+
+            context["tag"] = Tag.objects.get(slug=tag_slug)
+
+        return context
+
+
+def post_search(request):
+
+    form = SearchForm()
+
+    query = None
+
+    results = []
+
+    if "query" in request.GET:
+
+        form = SearchForm(request.GET)
+
+        if form.is_valid():
+
+            query = form.cleaned_data["query"]
+
+            results = Post.published.filter(
+                title__icontains=query
+            )
+
+    return render(
+        request,
+        "blog/post/search.html",
+        {
+            "form": form,
+            "query": query,
+            "results": results,
+        },
+    )
 
 
 # def post_list(request):
@@ -46,6 +105,7 @@ def post_detail(request, year, month, day, slug):
         'comments': comments,
         'new_comment': new_comment,
         'comment_form': comment_form,  # ✅ templatega uzatish
+        'post_tags': post.tags.all(),
     })
 
 def post_share(request, post_id):
@@ -68,12 +128,29 @@ def post_share(request, post_id):
 
 
 def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+
+    if request.method == "POST":
+
+        form = RegisterForm(request.POST)
+
         if form.is_valid():
-            user = form.save()
+
+            user = form.save(commit=False)
+
+            user.email = form.cleaned_data["email"]
+
+            user.save()
+
             login(request, user)
-            return redirect('/')
+
+            return redirect("/")
+
     else:
-        form = UserCreationForm()
-    return render(request, 'registration/register.html', {'form': form})
+
+        form = RegisterForm()
+
+    return render(
+        request,
+        "registration/register.html",
+        {"form": form},
+    )

@@ -1,0 +1,110 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+Search
+{% endblock %}
+
+{% block content %}
+
+<section class="posts-section">
+
+    <div class="section-header">
+
+        <h2>Search Articles</h2>
+
+        <p>Texnologiyaga oid maqolalarni qidiring</p>
+
+    </div>
+
+    <form action="{% url 'blogapp:post_search' %}"
+          method="get"
+          class="search-page-form">
+
+        <input
+                type="text"
+                name="query"
+                placeholder="Search articles..."
+                value="{{ query|default:'' }}">
+
+        <button
+                type="submit"
+                class="btn btn-primary">
+
+            Search
+
+        </button>
+
+    </form>
+
+    {% if query %}
+
+        <h3 class="search-result-title">
+
+            "{{ query }}" bo'yicha natijalar
+
+        </h3>
+
+        {% if results %}
+
+            <div class="posts-grid">
+
+                {% for post in results %}
+
+                    <article class="post-card glass">
+
+                        <h3>
+
+                            <a href="{{ post.get_absolute_url }}">
+
+                                {{ post.title }}
+
+                            </a>
+
+                        </h3>
+
+                        <p class="meta">
+
+                            {{ post.publish|date:"d M Y" }}
+
+                            •
+
+                            {{ post.author }}
+
+                        </p>
+
+                        <p>
+
+                            {{ post.body|truncatewords:25 }}
+
+                        </p>
+
+                        <a href="{{ post.get_absolute_url }}"
+                           class="read-more">
+
+                            Read More →
+
+                        </a>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="glass no-results">
+
+                <h3>😕 Hech qanday maqola topilmadi.</h3>
+
+                <p>Boshqa kalit so'z bilan urinib ko'ring.</p>
+
+            </div>
+
+        {% endif %}
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

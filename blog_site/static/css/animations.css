@@ -1,0 +1,130 @@
+/* ==========================================
+            PAGE FADE
+========================================== */
+
+body{
+    animation: pageFade .8s ease;
+}
+
+@keyframes pageFade{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ==========================================
+            HERO
+========================================== */
+
+.hero-content{
+    animation:heroUp 1s ease;
+}
+
+@keyframes heroUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ==========================================
+            BUTTON
+========================================== */
+
+.btn{
+    transition:.35s ease;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 35px rgba(124,58,237,.25);
+}
+
+/* ==========================================
+            CARD
+========================================== */
+
+.post-card{
+    transition:.35s ease;
+}
+
+.post-card:hover{
+    transform:translateY(-12px);
+}
+
+/* ==========================================
+            NAVBAR
+========================================== */
+
+.navbar{
+    animation:navbarDown .8s ease;
+}
+
+@keyframes navbarDown{
+    from{
+        opacity:0;
+        transform:translateY(-30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ==========================================
+            FOOTER
+========================================== */
+
+.footer{
+    animation:footerUp 1.2s ease;
+}
+
+@keyframes footerUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ==========================================
+        REVEAL
+========================================== */
+
+.reveal{
+    opacity:0;
+    transform:translateY(50px);
+    transition:opacity .8s ease, transform .8s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ==========================================
+        CARD REVEAL
+========================================== */
+
+.reveal-card{
+    opacity:0;
+    transform:translateY(70px);
+    transition:all .8s cubic-bezier(.22,.61,.36,1);
+}
+
+.reveal-card.show{
+    opacity:1;
+    transform:translateY(0);
+}

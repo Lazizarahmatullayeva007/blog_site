@@ -1,0 +1,45 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:var(--bg);
+
+    color:var(--white);
+
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+ul{
+    list-style:none;
+}
+
+button{
+
+    border:none;
+
+    cursor:pointer;
+
+    font-family:inherit;
+}
+
+img{
+
+    max-width:100%;
+
+    display:block;
+}

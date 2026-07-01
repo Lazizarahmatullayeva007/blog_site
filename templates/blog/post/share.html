@@ -1,87 +1,71 @@
 {% extends "blog/base.html" %}
-{% block title %}Post ulashish{% endblock %}
+
+{% block title %}Share Article{% endblock %}
+
 {% block content %}
 
-<a href="{% url 'blogapp:post_list' %}" style="display:inline-block; margin-bottom:12px; color:rgba(255,255,255,0.6); font-size:13px; border:1px solid rgba(255,255,255,0.15); padding:6px 14px; border-radius:8px;">← Orqaga</a>
+<section class="share-wrapper">
 
-<div style="margin-bottom: 1.5rem;">
-    <p style="font-size: 13px; color: #9ca3af; margin-bottom: 4px;">Post ulashish</p>
-    <h1 style="font-size: 22px; font-weight: 500;">Do'stingizga yuborish</h1>
-</div>
-
-{% if sent %}
     <div class="share-card">
-        <div class="share-card-header">
-            <div style="display:flex; align-items:center; gap:10px;">
-                <div class="share-icon-box">✉️</div>
-                <div>
-                    <div class="share-card-title">Email yuborildi!</div>
-                    <div class="share-card-subtitle">Maqola muvaffaqiyatli yuborildi</div>
-                </div>
-            </div>
-        </div>
-        <div class="share-card-body">
-            <p style="color:#9ca3af; margin-bottom:1.5rem;">
-                <strong style="color:white;">{{ post.title }}</strong> maqolasi yuborildi.
-            </p>
-            <a href="{% url 'blogapp:post_list' %}" class="share-submit-btn" style="text-decoration:none; display:flex; justify-content:center; align-items:center; gap:8px;">
-                ← Asosiy sahifaga qaytish
+
+        <div class="share-top">
+
+            <a href="{{ post.get_absolute_url }}" class="back-link">
+                ← Orqaga
             </a>
+
+            <h1 class="share-title">
+                📩 Do'stingizga yuborish
+            </h1>
+
+            <p class="share-desc">
+                <strong>{{ post.title }}</strong> maqolasini email orqali yuboring.
+            </p>
+
         </div>
+
+        {% if sent %}
+
+            <div class="success-box">
+                ✅ Email muvaffaqiyatli yuborildi.
+            </div>
+
+        {% else %}
+
+        <form method="post" class="share-form">
+
+            {% csrf_token %}
+
+            <div>
+                <label>👤 Ismingiz</label>
+                {{ form.name }}
+            </div>
+
+            <div>
+                <label>📧 Emailingiz</label>
+                {{ form.email }}
+            </div>
+
+            <div>
+                <label>📨 Kimga yuboriladi</label>
+                {{ form.to }}
+            </div>
+
+            <div>
+                <label>💬 Izoh (ixtiyoriy)</label>
+                {{ form.comments }}
+            </div>
+
+            <button type="submit" class="btn btn-primary share-btn">
+                🚀 Yuborish
+            </button>
+
+        </form>
+
+        {% endif %}
+
     </div>
 
-{% else %}
-    <div class="share-card">
-        <div class="share-card-header">
-            <div style="display:flex; align-items:center; gap:10px;">
-                <div class="share-icon-box">📨</div>
-                <div>
-                    <div class="share-card-title">Email orqali ulashish</div>
-                    <div class="share-card-subtitle">Qiziqarli maqolani do'stingizga yuboring</div>
-                </div>
-            </div>
-            <div class="share-post-badge">
-                📄 {{ post.title }}
-            </div>
-        </div>
-
-        <div class="share-card-body">
-            <form action="." method="post">
-                {% csrf_token %}
-
-                <div class="share-form-row">
-                    <div class="share-field">
-                        <label class="share-label">ISMINGIZ</label>
-                        {{ form.name }}
-                    </div>
-                    <div class="share-field">
-                        <label class="share-label">EMAILINGIZ</label>
-                        {{ form.email }}
-                    </div>
-                </div>
-
-                <div class="share-field">
-                    <label class="share-label">KIMGA YUBORISH</label>
-                    {{ form.to }}
-                </div>
-
-                <hr class="share-divider">
-
-                <div class="share-field">
-                    <label class="share-label">IZOH (IXTIYORIY)</label>
-                    {{ form.comments }}
-                </div>
-
-                <button type="submit" class="share-submit-btn">
-                    ✉ Yuborish
-                </button>
-            </form>
-        </div>
-
-        <div class="share-footer-note">
-            Email faqat bir marta yuboriladi va hech qayerda saqlanmaydi.
-        </div>
-    </div>
-{% endif %}
+</section>
 
 {% endblock %}

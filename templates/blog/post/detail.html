@@ -1,43 +1,187 @@
 {% extends "blog/base.html" %}
 {% block title %}{{ post.title }}{% endblock %}
-{% block content %}
-    <a href="{% url 'blogapp:post_list' %}" style="display:inline-block; margin-bottom:15px; color:#00abff;">← Orqaga</a>
 
-    <div class="post-detail">
-        <h1>{{ post.title }}</h1>
-        <p class="date">
-            Published {{ post.publish }} by {{ post.author }}
-        </p>
-        {{ post.body|linebreaks }}
+{% block content %}
+
+<section class="post-hero">
+
+    <a href="{% url 'blogapp:post_list' %}" class="back-link">
+
+        ← Back to Articles
+
+    </a>
+
+    <div class="post-header">
+
+        <span class="post-category">
+
+            Technology
+
+        </span>
+
+        <h1>
+
+            {{ post.title }}
+
+        </h1>
+
+        <div class="post-meta">
+
+            <span>
+
+                👤 {{ post.author }}
+
+            </span>
+
+            <span>
+
+                📅 {{ post.publish|date:"d M Y" }}
+
+            </span>
+
+        </div>
+
     </div>
 
+</section>
 
-    <a href="{% url 'blogapp:post_share' post.id %}">Share this post</a>
+{% if post_tags %}
 
-    {% with comments.count as total_comments %}
-    <h2>{{ total_comments }} comments</h2>
-    {% endwith %}
+<div class="post-tags">
 
-    {% for comment in comments %}
-        <div class="comment">
-            <p class="info">
-                Comment {{ forloop.counter }} by {{ comment.name }} {{ comment.created }}
-            </p>
-            <p>{{ comment.body }}</p>
-        </div>
-    {% empty %}
-        <p>There are no comments yet.</p>
+    {% for tag in post_tags %}
+        <a
+            href="{% url 'blogapp:post_list_by_tag' tag.slug %}"
+            class="post-tag">
+
+            #{{ tag.name }}
+
+        </a>
+
     {% endfor %}
 
-    {% if new_comment %}
-        <h3>Your comment has been added!</h3>
-    {% else %}
-        <h3>Add a new comment</h3>
-        <form action="." method="post">
+</div>
+
+{% endif %}
+
+<section class="article">
+
+    {{ post.body|linebreaks }}
+
+</section>
+
+<div class="share-box">
+
+    <a
+        href="{% url 'blogapp:post_share' post.id %}"
+        class="btn btn-primary">
+
+        Share Article
+
+    </a>
+
+</div>
+
+<!-- COMMENTLAR HOZIRCHA SHU YERDAN BOSHLANADI -->
+
+{% with comments.count as total_comments %}
+
+<h2>
+
+    {{ total_comments }} Comments
+
+</h2>
+
+{% endwith %}
+
+{% for comment in comments %}
+
+<div class="comment">
+
+    <p class="info">
+
+        {{ comment.name }}
+
+        •
+
+        {{ comment.created|date:"d M Y H:i" }}
+
+    </p>
+
+    <p>
+
+        {{ comment.body }}
+
+    </p>
+
+</div>
+
+{% empty %}
+
+<p>
+
+    No comments yet.
+
+</p>
+
+{% endfor %}
+
+{% if new_comment %}
+
+<div class="success-box">
+
+    ✅ Your comment has been added.
+
+</div>
+
+{% else %}
+
+<h3>
+
+    Leave a Comment
+
+</h3>
+
+
+<section class="comment-section">
+
+    <div class="comment-card glass">
+
+        <h2>💬 Leave a Comment</h2>
+
+        <p class="comment-subtitle">
+            Fikringizni yozib qoldiring.
+        </p>
+
+        <form method="post" class="comment-form">
+
             {% csrf_token %}
-            {{ comment_form.as_p }}
-            <input type="submit" value="ADD COMMENT">
+
+            <div class="form-group">
+                <label>👤 Full Name</label>
+                {{ comment_form.name }}
+            </div>
+
+            <div class="form-group">
+                <label>📧 Email Address</label>
+                {{ comment_form.email }}
+            </div>
+
+            <div class="form-group">
+                <label>💬 Your Comment</label>
+                {{ comment_form.body }}
+            </div>
+
+            <button type="submit" class="btn btn-primary comment-btn">
+                Post Comment
+            </button>
+
         </form>
-    {% endif %}
+
+    </div>
+
+</section>
+
+{% endif %}
 
 {% endblock %}
